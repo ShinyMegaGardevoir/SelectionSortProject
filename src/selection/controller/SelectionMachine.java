@@ -6,7 +6,7 @@ public class SelectionMachine
 {
 	public void SelectionMachine()
 	{
-		
+
 		
 		
 		
@@ -14,12 +14,55 @@ public class SelectionMachine
 	
 	
 	
-	private void swap(Pokemon [] array, int position, int change)
+	private void swap(int toBeSorted[], int position, int change)
 	{
-		Pokemon temp = array[position];
-		array[position] = array[change];
-		array[change] = temp;
+		int temp = toBeSorted[position];
+		toBeSorted[position] = toBeSorted[change];
+		toBeSorted[change] = temp;
 	}
+	
+	private void swap(Pokemon [] toBeSorted, int position, int change)
+	{
+		Pokemon temp = toBeSorted[position];
+		toBeSorted[position] = toBeSorted[change];
+		toBeSorted[change] = temp;
+	}
+	
+	// lo is the index of the leftmost element of the subarray
+		// hi is the index of the rightmost element of the subarray (inclusive)
+	
+	private int partition(int arr[], int lo, int hi)
+	{
+		int left = lo;
+		int right = hi;
+		int temp;
+		int pivot = arr[(left + right) / 2];
+		
+		while(left <= right)
+		{
+			while (arr[left] < pivot)
+			{
+				left++;
+			}
+			
+			while(arr[right] > pivot)
+			{
+				right--;
+			}
+			
+			if(left <= right)
+			{
+				temp = arr[left];
+				arr[left] = arr[right];
+				arr[right] = temp;
+				left++;
+				right--;
+			}
+		}
+		
+		return left;
+	}
+	
 	
 	public String sortingTime(long sortTime)
 	{
@@ -61,7 +104,7 @@ public class SelectionMachine
 		return toBeSorted;
 	}
 	
-	public Pokemon [] selectionSort(Pokemon [] sortThePokemon)
+	public Pokemon [] selectionSort(  Pokemon [] sortThePokemon)
 	{
 		int maximumPosition;
 		Pokemon maximum;
@@ -88,6 +131,25 @@ public class SelectionMachine
 		
 		return sortThePokemon;
 		
+	}
+	
+	
+	private void quickSort(int arr[], int lo, int hi)
+	{
+		if(lo < hi)
+		{
+			int index = partition(arr, lo, hi);
+			if (lo < index - 1)
+			{
+				quickSort(arr, lo, index - 1);
+			}
+			
+			if(index < hi)
+			{
+				quickSort(arr, index, hi);
+			}
+		}
+	
 	}
 
 }

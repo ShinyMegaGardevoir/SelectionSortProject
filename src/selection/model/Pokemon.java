@@ -9,7 +9,7 @@ public class Pokemon
 	private String typeOne;
 	private String typeTwo;
 	
-	public Pokemon(String name, int pokedexnumber, boolean evolves, int stage, String typeOne, String typeTwo)
+	public Pokemon(String name, int pokedexnumber, boolean evolves)
 	{
 		
 		
@@ -26,6 +26,7 @@ public class Pokemon
 		String pokemonString = "";
 		pokemonString += "Pokemon: " + name + "";
 		pokemonString += "Pokedex Number: #" + pokedexNumber + "";
+		pokemonString += "Evolves: " + evolves + "";
 		if(evolves)
 		{
 			pokemonString += "This Pokemon can evolve.";
@@ -131,28 +132,31 @@ public class Pokemon
 	{
 		this.evolves = evolves;
 	}
-	public int getStage()
+
+
+
+	public int compareTo(Pokemon otherPokemon)
 	{
-		return stage;
+		int comparedValue = 0;
+		
+		if(otherPokemon instanceof Pokemon)
+		{
+			if(this.pokedexNumber < ((Pokemon) otherPokemon).getPokedexNumber())
+			{
+				comparedValue = -1;
+			}
+			else if(this.pokedexNumber > ((Pokemon) otherPokemon).getPokedexNumber())
+			{
+				comparedValue = 1;
+			}
+		}
+		else
+		{
+			comparedValue = Integer.MIN_VALUE;
+		}
+		
+		return comparedValue;
 	}
-	public void setStage(int stage)
-	{
-		this.stage = stage;
-	}
-	public String getTypeOne()
-	{
-		return typeOne;
-	}
-	public void setTypeOne()
-	{
-		this.typeOne = typeOne;
-	}
-	public String getTypeTwo()
-	{
-		return typeTwo;
-	}
-	public void setTypeTwo()
-	{
-		this.typeTwo = typeTwo;
-	}
+
+	
 }
