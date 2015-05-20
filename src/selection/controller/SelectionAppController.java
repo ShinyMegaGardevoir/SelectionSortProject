@@ -10,14 +10,15 @@ public class SelectionAppController
 	
 	private Pokemon[][] myPokemon;
 	private SelectionFrame appFrame;
+	private SelectionMachine mySorter;
 	
 	
 	public SelectionAppController()
 	{
-//		mySorter = new SelectionMachine();
+		setMySorter(new SelectionMachine());
 		myPokemon = new Pokemon[5][4];
 		fillThePokemonList();
-//		appFrame = new SelectionFrame(this);
+		appFrame = new SelectionFrame(this);
 	}
 	
 	private void fillThePokemonList()
@@ -46,6 +47,9 @@ public class SelectionAppController
 	public void start()
 	{
 		fillTheArrays();
+
+		
+		
 		
 	}
 	
@@ -66,8 +70,8 @@ public class SelectionAppController
 			String name = index + " Pokemon";
 			int pokedexNumber = (int) (Math.random() * 10);
 			boolean evolves = (pokedexNumber % 2 == 0);
-			myPokemon(index) = new Pokemon[0][0];
-		}
+//			myPokemon = new Pokemon[0][0];
+	}
 	}
 	
 	private void fillTheStringArray()
@@ -88,6 +92,19 @@ public class SelectionAppController
 			integers[start] = (int) (Math.random() * 36000);
 		}
 	}
+	
+
+
+	public SelectionMachine getMySorter()
+	{
+		return mySorter;
+	}
+
+	public void setMySorter(SelectionMachine mySorter)
+	{
+		this.mySorter = mySorter;
+	}
+	
 	
 	
 	

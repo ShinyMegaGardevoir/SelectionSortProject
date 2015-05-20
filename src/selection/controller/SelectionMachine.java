@@ -1,12 +1,15 @@
 package selection.controller;
 
+import java.util.ArrayList;
+
 import selection.model.Pokemon;
 
 public class SelectionMachine
 {
 	public void SelectionMachine()
 	{
-
+		int[][] arr = new int[30][30];
+		quickSort(arr[20], 0, 19);
 		
 		
 		
@@ -26,6 +29,13 @@ public class SelectionMachine
 		Pokemon temp = toBeSorted[position];
 		toBeSorted[position] = toBeSorted[change];
 		toBeSorted[change] = temp;
+	}
+	
+	private void swap(ArrayList<Integer> myIntList, int firstSpot, int secondSpot)
+	{
+		int temp = myIntList.get(firstSpot);
+		myIntList.set(firstSpot, myIntList.get(secondSpot));
+		myIntList.set(secondSpot,  temp);
 	}
 	
 	// lo is the index of the leftmost element of the subarray
@@ -81,7 +91,7 @@ public class SelectionMachine
 	{
 		int minimum;
 		int minimumPosition;
-//		startTime = System.currentTimeMillis();
+//		long startTime = System.currentTimeMillis();
 		for(int position = 0; position < toBeSorted.length; position++)
 		{
 			minimumPosition = position;
@@ -96,7 +106,7 @@ public class SelectionMachine
 			}
 			if(minimumPosition != position)
 			{
-				swap(toBeSorted, position, minimumPosition);
+//				swap(toBeSorted, position, minimumPosition);
 			}
 		}
 //		endTime = System.currentTimeMillis();
@@ -104,11 +114,12 @@ public class SelectionMachine
 		return toBeSorted;
 	}
 	
-	public Pokemon [] selectionSort(  Pokemon [] sortThePokemon)
+	public Pokemon [] selectionSort(Pokemon [] sortThePokemon)
 	{
+		long endTime; long sortTime;
 		int maximumPosition;
 		Pokemon maximum;
-//		startTime = System.currentTimeMillis();
+		long startTime = System.currentTimeMillis();
 		for(int position = 0; position < sortThePokemon.length; position ++)
 		{
 			maximumPosition = position;
@@ -126,15 +137,45 @@ public class SelectionMachine
 				swap(sortThePokemon, position, maximumPosition);
 			}
 		}
-//		endTime = System.currentTimeMillis();
-//		sortTime = endTime - startTime;
+		endTime = System.currentTimeMillis();
+		sortTime = endTime - startTime;
 		
 		return sortThePokemon;
 		
 	}
 	
+	public ArrayList<Integer> selectionSort(ArrayList<Integer> listOfInts)
+	{
+		long endTime; long sortTime;
+		int minimumPosition;
+		int minimum;
+		long startTime = System.currentTimeMillis();
+		for(int position = 0; position < listOfInts.size(); position ++)
+		{
+			minimumPosition = position;
+			minimum = listOfInts.get(position);
+			for(int next = position + 1; next < listOfInts.size(); next++)
+			{
+				if(listOfInts.get(next) < minimum)
+				{
+					minimum = listOfInts.get(next);
+					minimumPosition = next;
+				}
+			}
+			if(minimumPosition != position)
+			{
+				swap(listOfInts, position, minimumPosition);
+			}
+		}
+		endTime = System.currentTimeMillis();
+		sortTime = endTime - startTime;
+		
+		return listOfInts;
+		
+	}
 	
-	private void quickSort(int arr[], int lo, int hi)
+	
+	public void quickSort(int arr[], int lo, int hi)
 	{
 		if(lo < hi)
 		{
